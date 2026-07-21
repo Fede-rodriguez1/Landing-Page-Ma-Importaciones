@@ -71,6 +71,13 @@
   .btn-ghost:hover{background:rgba(255,255,255,.16); transform:translateY(-2px);}
   .btn-teal{background:var(--teal); color:#fff; padding:15px 30px;}
   .btn-teal:hover{transform:translateY(-2px); background:var(--teal-dark); box-shadow:var(--shadow-md);}
+  .btn svg{width:17px; height:17px; flex-shrink:0;}
+  /* CTA principal destacado (hero) */
+  .btn-hero{padding:18px 38px; font-size:16px; box-shadow:0 16px 34px rgba(23,163,152,.45); animation:heroPulse 2.6s ease-in-out infinite;}
+  .btn-hero svg{width:19px; height:19px;}
+  .btn-hero:hover{animation:none;}
+  @keyframes heroPulse{0%,100%{box-shadow:0 16px 34px rgba(23,163,152,.45);} 50%{box-shadow:0 18px 40px rgba(23,163,152,.68);}}
+  @media (prefers-reduced-motion:reduce){.btn-hero{animation:none;}}
 
   /* ===== Reveal animation ===== */
   .reveal{opacity:0; transform:translateY(28px); transition:opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1);}
@@ -96,8 +103,12 @@
   }
   nav.tabs a.active{background:var(--navy); color:#fff;}
   nav.tabs a:not(.active):hover{color:var(--navy);}
-  .cta-top{background:var(--teal); color:#fff; padding:11px 22px; border-radius:10px; font-weight:600; font-size:13.5px; cursor:pointer; transition:transform .2s ease, background .2s ease; border:none;}
-  .cta-top:hover{background:var(--teal-dark); transform:translateY(-1px);}
+  .cta-top{background:var(--navy); color:#fff; padding:11px 22px; border-radius:10px; font-weight:600; font-size:13.5px; cursor:pointer; transition:transform .2s ease, background .2s ease; border:none;}
+  .cta-top:hover{background:var(--teal); transform:translateY(-1px);}
+  .nav-ctas{display:flex; align-items:center; gap:10px;}
+  .cta-agenda{display:inline-flex; align-items:center; gap:8px; background:var(--amber); color:var(--navy); padding:11px 22px; border-radius:10px; font-weight:700; font-size:13.5px; cursor:pointer; border:none; box-shadow:0 8px 20px rgba(242,169,59,.38); transition:transform .2s ease, box-shadow .2s ease, background .2s ease;}
+  .cta-agenda:hover{transform:translateY(-2px); box-shadow:0 13px 28px rgba(242,169,59,.55);}
+  .cta-agenda svg{width:16px; height:16px;}
   .burger{display:none; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:8px;}
   .burger span{width:22px; height:2px; background:var(--navy); border-radius:2px; transition:transform .3s ease, opacity .3s ease;}
   .burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
@@ -269,6 +280,27 @@
   .footer-links a:hover{color:#fff;}
   .footer-copy{width:100%; text-align:center; border-top:1px solid rgba(255,255,255,.1); margin-top:28px; padding-top:20px; font-size:12px; color:#7C8FA6;}
 
+  /* ===== Selector de agendamiento (llamada / presencial) ===== */
+  .agenda-modal{position:fixed; inset:0; z-index:100; display:none; align-items:center; justify-content:center; padding:24px;}
+  .agenda-modal.open{display:flex;}
+  .agenda-backdrop{position:absolute; inset:0; background:rgba(11,31,58,.55); backdrop-filter:blur(3px);}
+  .agenda-dialog{position:relative; z-index:2; background:var(--white); border-radius:20px; padding:34px 30px; max-width:440px; width:100%; box-shadow:var(--shadow-lg); animation:agendaPop .3s ease;}
+  @keyframes agendaPop{from{opacity:0; transform:translateY(12px) scale(.98);} to{opacity:1; transform:none;}}
+  .agenda-x{position:absolute; top:14px; right:16px; width:32px; height:32px; border:none; background:var(--bg); border-radius:8px; font-size:20px; line-height:1; color:var(--gray); cursor:pointer; transition:background .2s ease, color .2s ease;}
+  .agenda-x:hover{background:var(--line); color:var(--navy);}
+  .agenda-head{text-align:center; margin-bottom:22px;}
+  .agenda-head .eyebrow{color:var(--teal);}
+  .agenda-head h3{font-size:20px; color:var(--navy); font-weight:800; margin:8px 0 6px;}
+  .agenda-head p{font-size:13.5px; color:var(--gray); line-height:1.55;}
+  .agenda-options{display:flex; flex-direction:column; gap:12px;}
+  .agenda-opt{display:flex; align-items:center; gap:14px; border:1.5px solid var(--line); border-radius:14px; padding:16px 18px; background:#FBFCFD; transition:border-color .2s ease, transform .2s ease, box-shadow .2s ease;}
+  .agenda-opt:hover{border-color:var(--teal); transform:translateY(-2px); box-shadow:var(--shadow-sm);}
+  .agenda-opt-ico{flex-shrink:0; width:44px; height:44px; border-radius:12px; background:var(--teal-light); color:var(--teal); display:flex; align-items:center; justify-content:center;}
+  .agenda-opt-ico svg{width:22px; height:22px;}
+  .agenda-opt-txt{display:flex; flex-direction:column; gap:2px;}
+  .agenda-opt-txt b{font-size:15px; color:var(--navy); font-weight:700; font-family:'Sora';}
+  .agenda-opt-txt small{font-size:12.5px; color:var(--gray);}
+
   /* Floating WhatsApp */
   .wa-float{position:fixed; bottom:24px; right:24px; z-index:60; width:56px; height:56px; border-radius:50%; background:#25D366; box-shadow:0 12px 28px rgba(37,211,102,.4); display:flex; align-items:center; justify-content:center; transition:transform .2s ease;}
   .wa-float:hover{transform:scale(1.08);}
@@ -321,30 +353,9 @@
   .map-wrap{max-width:var(--maxw); margin:26px auto 0; border-radius:20px; overflow:hidden; box-shadow:var(--shadow-md); border:1px solid var(--line); line-height:0;}
   .map-wrap iframe{width:100%; height:300px; border:0; display:block;}
 
-  /* ===== Modal: Agenda tu asesoría ===== */
-  .book-overlay{position:fixed; inset:0; z-index:100; display:flex; align-items:center; justify-content:center; padding:24px; background:rgba(11,31,58,.55); backdrop-filter:blur(4px); opacity:0; visibility:hidden; transition:opacity .25s ease, visibility .25s ease;}
-  .book-overlay.open{opacity:1; visibility:visible;}
-  .book-dialog{background:var(--white); border-radius:22px; max-width:460px; width:100%; padding:34px 30px 30px; box-shadow:var(--shadow-lg); position:relative; transform:translateY(16px) scale(.98); transition:transform .3s cubic-bezier(.2,.7,.2,1);}
-  .book-overlay.open .book-dialog{transform:none;}
-  .book-close{position:absolute; top:14px; right:16px; width:34px; height:34px; border:none; background:var(--bg); color:var(--gray); border-radius:50%; font-size:20px; line-height:1; cursor:pointer; transition:background .2s ease, color .2s ease;}
-  .book-close:hover{background:var(--teal-light); color:var(--teal);}
-  .book-head{text-align:center; margin-bottom:24px;}
-  .book-head .eyebrow{color:var(--teal);}
-  .book-head h3{font-family:'Sora'; font-size:22px; font-weight:800; color:var(--navy); margin:8px 0;}
-  .book-head p{font-size:13.5px; color:var(--gray); line-height:1.6;}
-  .book-options{display:flex; flex-direction:column; gap:14px;}
-  .book-opt{display:flex; align-items:center; gap:16px; border:1.5px solid var(--line); border-radius:14px; padding:18px; background:#FBFCFD; transition:border-color .2s ease, transform .2s ease, box-shadow .2s ease;}
-  .book-opt:hover{border-color:var(--teal); transform:translateY(-2px); box-shadow:var(--shadow-sm);}
-  .book-opt-ico{flex-shrink:0; width:46px; height:46px; border-radius:12px; background:var(--teal-light); display:flex; align-items:center; justify-content:center; font-size:22px;}
-  .book-opt-txt{display:flex; flex-direction:column; gap:3px; flex:1;}
-  .book-opt-t{font-family:'Sora'; font-weight:700; font-size:15px; color:var(--navy);}
-  .book-opt-s{font-size:12.5px; color:var(--gray); line-height:1.5;}
-  .book-opt-arrow{color:var(--teal); font-size:18px; font-weight:700; transition:transform .2s ease;}
-  .book-opt:hover .book-opt-arrow{transform:translateX(4px);}
-
   /* ================= RESPONSIVE ================= */
   @media (max-width:900px){
-    nav.tabs, .cta-top{display:none;}
+    nav.tabs, .nav-ctas{display:none;}
     .burger{display:flex;}
     .hero-grid{grid-template-columns:1fr; padding-top:56px; gap:36px;}
     .hero-visual{height:320px; order:-1;}
@@ -381,14 +392,22 @@
       <a href="#servicio" data-link>Servicios</a>
       <a href="#contacto" data-link>Contacto</a>
     </nav>
-    <button type="button" class="cta-top" data-open-book>Agenda tu asesoría</button>
+    <div class="nav-ctas">
+      <a href="https://calendly.com/matiasolivieri34/30min" target="_blank" rel="noopener" class="cta-agenda js-agenda">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        Agendá tu asesoría
+      </a>
+    </div>
     <button class="burger" id="burger" aria-label="Menú"><span></span><span></span><span></span></button>
   </div>
   <div class="mobile-menu" id="mobileMenu">
     <a href="#nosotros">Nosotros</a>
     <a href="#servicio">Servicios</a>
     <a href="#contacto">Contacto</a>
-    <button type="button" class="btn btn-teal" data-open-book style="justify-content:center;">Agenda tu asesoría</button>
+    <a href="https://calendly.com/matiasolivieri34/30min" target="_blank" rel="noopener" class="btn btn-teal js-agenda">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      Agendá tu asesoría
+    </a>
   </div>
 </header>
 
@@ -400,7 +419,10 @@
       <h1>Importá desde <span class="hl">China</span> a Uruguay, sin complicaciones</h1>
       <p>Somos una empresa uruguaya con más de 10 años de importación directa y agente de compras propio en origen. Nos encargamos de la compra, el transporte y la Aduana. Vos solo elegís qué traer.</p>
       <div class="hero-actions">
-        <a href="#contacto" class="btn btn-amber">Cotizar mi importación</a>
+        <a href="https://calendly.com/matiasolivieri34/30min" target="_blank" rel="noopener" class="btn btn-teal btn-hero js-agenda">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          Agendá tu asesoría
+        </a>
         <a href="#servicio" class="btn btn-ghost">Ver cómo funciona</a>
       </div>
       <div class="hero-trust"><span class="stars">★★★★★</span> Importadores que ya confían en nosotros desde 2016</div>
@@ -595,7 +617,6 @@
         <p>Ideal para mayores volúmenes o una gran variedad de mercadería.</p>
       </div>
     </div>
-    <a href="#contacto" class="btn btn-amber">Cotizar mi importación</a>
   </div>
 
   <div class="faq-wrap">
@@ -640,8 +661,13 @@
 
   <div class="final-cta">
     <h2>¿Listo para importar?</h2>
-    <p>Contanos qué producto tenés en mente y armamos tu cotización.</p>
-    <a href="#contacto" class="btn btn-navy">Empezar ahora</a>
+    <p>Contanos qué producto tenés en mente y armamos tu cotización, o agendá una asesoría por llamada o presencial.</p>
+    <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
+      <a href="https://calendly.com/matiasolivieri34/30min" target="_blank" rel="noopener" class="btn btn-teal js-agenda">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        Agendá tu asesoría
+      </a>
+    </div>
   </div>
 </section>
 
@@ -715,39 +741,36 @@
   <div class="footer-copy">© 2026 MA Importaciones · Arenal Grande 2125, Montevideo, Uruguay</div>
 </footer>
 
-<a class="wa-float" href="https://wa.me/59892223914" target="_blank" rel="noopener" aria-label="WhatsApp">
-  <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.945C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 018.413 3.488 11.82 11.82 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.87 9.87 0 001.599 5.379l-.999 3.648 3.9-1.026zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.767.967-.94 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.017-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
-</a>
-
-<!-- ===== MODAL: Agenda tu asesoría ===== -->
-<div class="book-overlay" id="bookModal" aria-hidden="true">
-  <div class="book-dialog" role="dialog" aria-modal="true" aria-labelledby="bookTitle">
-    <button type="button" class="book-close" data-close-book aria-label="Cerrar">&times;</button>
-    <div class="book-head">
-      <div class="eyebrow">Primer paso</div>
-      <h3 id="bookTitle">Agendá tu asesoría</h3>
-      <p>Elegí cómo preferís que te asesoremos. Sin costo y sin compromiso.</p>
+<!-- ===== Selector de agendamiento ===== -->
+<div class="agenda-modal" id="agendaModal" aria-hidden="true">
+  <div class="agenda-backdrop" data-agenda-close></div>
+  <div class="agenda-dialog" role="dialog" aria-modal="true" aria-labelledby="agendaTitle">
+    <button class="agenda-x" type="button" data-agenda-close aria-label="Cerrar">&times;</button>
+    <div class="agenda-head">
+      <div class="eyebrow">Agendá tu asesoría</div>
+      <h3 id="agendaTitle">¿Cómo preferís tu asesoría?</h3>
+      <p>Elegí la modalidad y coordinás el día y la hora que mejor te queden.</p>
     </div>
-    <div class="book-options">
-      <a href="https://calendly.com/matiasolivieri34/new-meeting" target="_blank" rel="noopener" class="book-opt">
-        <span class="book-opt-ico">📞</span>
-        <span class="book-opt-txt">
-          <span class="book-opt-t">Agendar llamada</span>
-          <span class="book-opt-s">Coordinamos una llamada telefónica en el horario que elijas.</span>
+    <div class="agenda-options">
+      <a class="agenda-opt" href="https://calendly.com/matiasolivieri34/new-meeting" target="_blank" rel="noopener">
+        <span class="agenda-opt-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
         </span>
-        <span class="book-opt-arrow">→</span>
+        <span class="agenda-opt-txt"><b>Por llamada</b><small>Coordinamos una llamada o videollamada</small></span>
       </a>
-      <a href="https://calendly.com/matiasolivieri34/30min" target="_blank" rel="noopener" class="book-opt">
-        <span class="book-opt-ico">🤝</span>
-        <span class="book-opt-txt">
-          <span class="book-opt-t">Agendar reunión</span>
-          <span class="book-opt-s">Reservá una reunión por videollamada de 30 minutos.</span>
+      <a class="agenda-opt" href="https://calendly.com/matiasolivieri34/30min" target="_blank" rel="noopener">
+        <span class="agenda-opt-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
         </span>
-        <span class="book-opt-arrow">→</span>
+        <span class="agenda-opt-txt"><b>En persona</b><small>Nos visitás en nuestro local en Montevideo</small></span>
       </a>
     </div>
   </div>
 </div>
+
+<a class="wa-float" href="https://wa.me/59892223914" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.945C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 018.413 3.488 11.82 11.82 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.87 9.87 0 001.599 5.379l-.999 3.648 3.9-1.026zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.767.967-.94 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.017-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+</a>
 
 <script>
   // Header shadow on scroll
@@ -809,6 +832,26 @@
     });
   });
 
+  // Selector de agendamiento (llamada / presencial)
+  const agendaModal = document.getElementById('agendaModal');
+  const openAgenda = () => {
+    agendaModal.classList.add('open');
+    agendaModal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  };
+  const closeAgenda = () => {
+    agendaModal.classList.remove('open');
+    agendaModal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  };
+  document.querySelectorAll('.js-agenda').forEach(b => b.addEventListener('click', (e) => {
+    e.preventDefault();
+    openAgenda();
+  }));
+  agendaModal.querySelectorAll('[data-agenda-close]').forEach(el => el.addEventListener('click', closeAgenda));
+  agendaModal.querySelectorAll('.agenda-opt').forEach(a => a.addEventListener('click', () => setTimeout(closeAgenda, 120)));
+  document.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeAgenda(); });
+
   // Contact form validation + success
   const form = document.getElementById('contactForm');
   const success = document.getElementById('formSuccess');
@@ -842,25 +885,6 @@
     setTimeout(() => success.classList.remove('show'), 6000);
   });
   form.querySelectorAll('input').forEach(i => i.addEventListener('input', () => i.classList.remove('err')));
-
-  // Modal "Agenda tu asesoría"
-  const bookModal = document.getElementById('bookModal');
-  const openBook = () => {
-    burger.classList.remove('open'); mobileMenu.classList.remove('open'); // cierra menú móvil si estaba abierto
-    bookModal.classList.add('open');
-    bookModal.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'hidden';
-  };
-  const closeBook = () => {
-    bookModal.classList.remove('open');
-    bookModal.setAttribute('aria-hidden', 'true');
-    document.body.style.overflow = '';
-  };
-  document.querySelectorAll('[data-open-book]').forEach(b => b.addEventListener('click', (e) => { e.preventDefault(); openBook(); }));
-  bookModal.querySelectorAll('[data-close-book]').forEach(b => b.addEventListener('click', closeBook));
-  bookModal.addEventListener('click', (e) => { if(e.target === bookModal) closeBook(); }); // clic fuera cierra
-  bookModal.querySelectorAll('.book-opt').forEach(a => a.addEventListener('click', closeBook)); // al elegir opción, cierra
-  document.addEventListener('keydown', (e) => { if(e.key === 'Escape' && bookModal.classList.contains('open')) closeBook(); });
 </script>
 </body>
 </html>
